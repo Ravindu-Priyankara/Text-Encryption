@@ -291,6 +291,23 @@ class Handler():
                 file.write(str(1))
                 file.close()
 
-    def __init__(self,data,file_name):
-        encrypted_data =split_data(data)
-        write_file('user_detail1.db',encrypted_data)
+    def __init__(self,data,type):
+
+        if type == "enc":
+            encrypted_data =split_data(data)
+            write_file('user_detail1.db',encrypted_data)
+
+        elif type == "dec":
+            value0 = read_db0_files("user_detail1.db")
+            random_list, list_shuffle_type = list_shuffle(value0)
+            encrypted_value = checker(random_list,list_shuffle_type,data)
+            value2 = comparison(encrypted_value,"user_detail1.db")
+            parser(value2)
+            
+            
+        """else:
+            value1 = read_db1_files(file_name)
+            random_list, list_shuffle_type = list_shuffle(value1)
+            encrypted_value = checker(random_list,list_shuffle_type,data)
+            value2 = comparison(encrypted_value,file_name)
+            parser(value2)"""
